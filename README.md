@@ -1,9 +1,6 @@
 # Composers
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/composers`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
-
+Who doesn't love Bach, Beethoven and Brahms. But today, you're in it to learn more about a new classical composer. This gem will give you the option of first choosing a letter from the alphabet to narrow down your choices. Then you get to choose which composer you'd like to learn more about - once you settle on your choice, you'll get a chance to read about their biography, birth year, notable works and a url to learn more!
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -22,7 +19,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Wanna learn more about a classical composer? Well, then have a go! Type a letter from the alphabet, choose a composer whose name starts with the letter you chose and finally, learn more about a specific composer of your choice! Yipee!
 
 ## Development
 

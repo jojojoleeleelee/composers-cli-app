@@ -9,5 +9,6 @@ class Composers::Classical
     input = nil
     while input != 'exit'
     input = gets.strip.downcase[0]
+    end
   end
 end
