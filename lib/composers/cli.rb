@@ -1,4 +1,10 @@
 class Composers::CLI
+  attr_accessor :name, :bio, :year, :works, :url
+@@all = []
+  def initialize(profile_hash)
+    profile_hash.each {|key, value| self.send(("#{key}="), value)}
+    @@all << self
+  end
 
   def call
     puts "********************** WANT TO LEARN MORE ABOUT COMPOSERS? *****************"
@@ -24,7 +30,6 @@ class Composers::CLI
         Composers::ComposersFunction.list_of_composers(to_number(input.upcase[0]))
         puts "Now, choose the person you want to learn more about by typing the corresponding number of that composer."
         input = gets.strip
-
         input = "exit"
       else
         start

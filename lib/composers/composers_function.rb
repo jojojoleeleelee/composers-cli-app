@@ -1,12 +1,5 @@
 
 class Composers::ComposersFunction
-  attr_accessor :name, :bio, :year, :works, :url
-
-  def initialize(name = nil, url = nil)
-    @name = name
-    @url = url
-  end
-
 
   def self.list_of_composers(input)
     html = open("http://www.classical.net/music/composer/masterindex.php")
@@ -23,16 +16,24 @@ class Composers::ComposersFunction
     end
   end
 
-  def self.profile_url
+  def self.profile_url(input, num)
     html = open("http://www.classical.net/music/composer/masterindex.php")
     scrape = Nokogiri::HTML(html)
-    binding.pry
 
-    scrape.css('.worklist')[0].xpath('a')[0].attr('href').value
+    @url = scrape.css('.worklist')[input].css('a')[num].attribute('href').value.gsub("..","http://www.classical.net/music")
+    @url
   end
 
-  def self.composer_profile(profile_url)
-
-
+  def self.composer_profile(@url)
+    doc = Nokogiri::HTML(open(@url))
+    profile = Hash.new
+    profile[:bio] = doc.css('.composerbiocontainer').css('p').map do |p|
+      p.text.strip!
+    end
+    profile[:year] = doc.css('h4').text
+    profile[:works] = doc.css('.recommendedpiececontainer').css('dt').map do |w| w.text.strip!
+    end
+    profile[:url] = @url
   end
+  profile
 end
