@@ -13,8 +13,8 @@ class Composers::ComposersFunction
     scrape = Nokogiri::HTML(html)
     collection = Array.new
     i = 0
-    while i < scrape.css('.worklist')["#{input}"].css('li').length
-      collection << scrape.css('.worklist').css('li').css('a')[i].children.text
+    while i < scrape.css('.worklist')[input-1].css('li').length
+      collection << scrape.css('.worklist')[input-1].css('li').css('a')[i].children.text
       i += 1
     end
 
@@ -26,8 +26,9 @@ class Composers::ComposersFunction
   def self.profile_url
     html = open("http://www.classical.net/music/composer/masterindex.php")
     scrape = Nokogiri::HTML(html)
+    binding.pry
 
-    scrape.css('.worklist').css('a')[0].attribute('href').value
+    scrape.css('.worklist')[0].xpath('a')[0].attr('href').value
   end
 
   def self.composer_profile(profile_url)
