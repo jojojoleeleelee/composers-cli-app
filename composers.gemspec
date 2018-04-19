@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["'Joanne Lee'"]
   spec.email         = ["'vernapii@gmail.com'"]
 
-  spec.summary       =  "Write a short summary, because RubyGems requires one.}"
-  spec.description   = "Write a longer description or delete this line.}"
+  spec.summary       = "Do you like Classical music? Are you into composers? Well then, this gem is for you!"
+  spec.description   = "This is a CLI app that outputs your choice of classical composer you would like to learn more about. Grouped alphabetically, this app will output your choice of composer's biography, years of life, major works and url resource if you'd like to learn more"
   spec.homepage      = "https://github.com/jojojoleeleelee/composers-cli-app"
   spec.license       = "MIT"
 
