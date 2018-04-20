@@ -17,13 +17,15 @@ class Composers::CLI
 
   def start
     input = nil
-   while input != "exit"
      puts "******************** Type your favorite letter from the alphabet:************* "
      puts "******************** C'mon it can't be that hard...*************************** "
      puts "********* Actually, any letter but 'U'! You still have 25 choices! *********** "
      puts "********** Enter exit to end. Or not, if you're enjoying this :D ************* "
-     input = gets.strip.upcase[0]
-     if input == "U"
+     input = gets.strip.upcase
+     if input == 'EXIT'
+       puts "So soon? You're missing out!"
+       exit!
+     elsif input == "U"
        puts "******************************** HOW COULD YOU! ******************************"
        puts "********************************   Outrageous ********************************"
        puts "****************** I told you not to! You've betrayed me. ********************"
@@ -32,14 +34,15 @@ class Composers::CLI
        puts "*************** I'm so nice, I'll still give you another try'. ***************"
        puts ''
        puts ''
-     elsif input.is_a? String
-       @input = to_number(input)
-       Composers::ComposersFunction.list_of_composers(@input)
+       start
+     elsif input.length == 1
+       @input = to_number(input[0])
+       Composers::Scraper.list_of_composers(@input)
        composer_choice
-     else
+     elsif input.length > 1
+       puts "Now, now, try that again."
        start
      end
-   end
    puts "Buh-Bye! Remember to listen to some Bach :)"
  end
 
@@ -47,10 +50,14 @@ class Composers::CLI
     puts "Now, choose the person you want to learn more about by typing the corresponding number of that composer."
     num = gets.strip
 
-   if num.to_i <= Composers::ComposersFunction.collection.length
-     Composers::ComposersFunction.profile_url(@input, num)
-     Composers::ComposersFunction.composer_profile(@url)
-
+   if num.to_i != 0 && num.to_i <= Composers::Scraper.collection.length
+     Composers::Scraper.profile_url(@input, num)
+     Composers::Scraper.composer_profile(@url)
+     Composers::Composer.display_all
+     puts "Wanna learn more about another composer?"
+     composer_choice
+   elsif num == 'exit'
+     puts "Parting is such sweet sorrow that I shall say goodnight till it be morrow."
    else
      puts "Hmmm... can you enter that again?"
      composer_choice
