@@ -15,7 +15,6 @@ class Composers::Scraper
      end
      @@collection.each.with_index(1) do |name, idx|
        puts "#{idx}. - #{name}"
-       @@profile[:name] = name
      end
   end
 
@@ -32,6 +31,7 @@ class Composers::Scraper
 
   def self.composer_profile(url)
     doc = Nokogiri::HTML(open(@url))
+    @@profile[:name] = doc.css('[id="center"]').css('h3').first.text
     @@profile[:bio] = doc.css('.composerbiocontainer').css('p').map do |p|
       p.text.strip!
     end

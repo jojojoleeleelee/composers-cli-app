@@ -23,7 +23,7 @@ class Composers::CLI
      puts "********** Enter exit to end. Or not, if you're enjoying this :D ************* "
      input = gets.strip.upcase
      if input == 'EXIT'
-       puts "So soon? You're missing out!"
+       puts "Buh-Bye! Remember to listen to some Bach :))"
        exit!
      elsif input == "U"
        puts "******************************** HOW COULD YOU! ******************************"
@@ -55,7 +55,7 @@ class Composers::CLI
      Composers::Scraper.composer_profile(@url)
      Composers::Composer.display_all
      puts "Wanna learn more about another composer?"
-     composer_choice
+     start
    elsif num == 'exit'
      puts "Parting is such sweet sorrow that I shall say goodnight till it be morrow."
    else
