@@ -1,26 +1,31 @@
 class Composers::ComposersFunction
+  attr_accessor :url, :composer
+@@collection = []
 
   def self.list_of_composers(input)
     html = open("http://www.classical.net/music/composer/masterindex.php")
      scrape = Nokogiri::HTML(html)
-     collection = Array.new
+
      i = 0
      while i < scrape.css('.worklist')[input-1].css('li').length
-       collection << scrape.css('.worklist')[input-1].css('li').css('a')[i].children.text
+       @@collection << scrape.css('.worklist')[input-1].css('li').css('a')[i].children.text
        i += 1
      end
 
-     collection.each.with_index(1) do |name, idx|
+     @@collection.each.with_index(1) do |name, idx|
        puts "#{idx}. - #{name}"
      end
+  end
+
+  def self.collection
+    @@collection
   end
 
   def self.profile_url(input, num)
     html = open("http://www.classical.net/music/composer/masterindex.php")
     scrape = Nokogiri::HTML(html)
-
-    @url = scrape.css('.worklist')[input].css('a')[num].attribute('href').value.gsub("..","http://www.classical.net/music")
-    @url
+    url = scrape.css('.worklist')[input-1].css('a')[num.to_i-1].attribute('href').value.gsub("..","http://www.classical.net/music")
+    @url = url
   end
 
   def self.composer_profile(url)
@@ -33,6 +38,7 @@ class Composers::ComposersFunction
     profile[:works] = doc.css('.recommendedpiececontainer').css('dt').map do |w| w.text.strip!
     end
     profile[:url] = @url
+
     profile
   end
 end
