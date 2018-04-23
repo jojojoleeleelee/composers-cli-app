@@ -1,11 +1,13 @@
 class Composers::Composer
   attr_accessor :name, :bio, :year, :works, :url, :input
-  @@all = {}
+  @@display = {}
+  @@all = []
 
   def initialize(profile)
-    profile.map {|key, value| self.send(("#{key}="), value)}
+    profile.each {|key, value| self.send(("#{key}="), value)}
     profile.to_hash
-    @@all = profile
+    @@display = profile
+    @@all << self
   end
 
   def to_hash
@@ -18,7 +20,7 @@ class Composers::Composer
   end
 
   def self.display_all
-    all.each do |attr, content|
+    @@display.each do |attr, content|
       puts "----------------------------------- #{attr} -------------------------------------"
       puts content
     end
