@@ -14,6 +14,7 @@ class Composers::Scraper
        i += 1
      end
      @@collection.each.with_index(1) do |name, idx|
+       # can we put the `puts` statement into the CLI class somehow?
        puts "#{idx}. - #{name}"
      end
   end
@@ -40,6 +41,12 @@ class Composers::Scraper
     end
 
     @@profile[:url] = @url
+    # here's where we actually instantiate a new composer.  Could we do this without
+    # a @@profile class variable?  I bet we can.  Maybe a variable that's a hash,
+    # similar to @@profile, and call it `composer_attributes`  Then, when we could
+    # call something along the lines of
+    # current_composer = Composers::Composer.new(composer_attributes)
+    # and keep track of this composer as we move through the flow...
     Composers::Composer.new(@@profile)
     @@profile
   end
