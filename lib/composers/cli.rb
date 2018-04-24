@@ -53,6 +53,10 @@ class Composers::CLI
    if num.to_i != 0 && num.to_i <= Composers::Scraper.collection.length
      Composers::Scraper.profile_url(@input, num)
      Composers::Scraper.composer_profile(@url)
+     # Here is where we are calling the #display_all method.  How could we change
+     # this if we were dealing with just an instance of a Composer.  We would want something like:
+     # composer = Composer.new or Composer.last or something.. then we could just call
+     # composer.display_all
      Composers::Composer.display_all
      puts "Wanna learn more about another composer?"
      start
